@@ -1,0 +1,20 @@
+.navbar-fixed-top.navbar-inverse
+  .container
+    %a.navbar-brand Codebreaker
+.container(ng-app ng-controller="codeCtrl")
+  .row
+    .col-lg-6
+      .well
+        %textarea(ng-model="secretMessage")
+  .row
+    .col-lg-6
+      %p {{ secretMessage }}
+
+  .row
+    .col-lg-6
+      .well
+        %p {{ copyOfMessage }}
+        -# %span(ng-repeat="letter in letters")
+          %b {{ letter.letter }}
+          translated: {{ letter.translated }}
+          %br
