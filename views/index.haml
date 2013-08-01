@@ -1,20 +1,32 @@
 .navbar-fixed-top.navbar-inverse
   .container
     %a.navbar-brand Codebreaker
-.container(ng-app ng-controller="codeCtrl")
+
+.container
   .row
     .col-lg-6
-      .well
-        %textarea(ng-model="secretMessage")
+      %h4 Write your secret message here.
   .row
+    .col-lg-6
+      %textarea(ng-model="secretMessage")
+  -# .row
     .col-lg-6
       %p {{ secretMessage }}
 
+.container(style="background:#ccc; margin-top: 30px;")
+  .row
+    .col-lg-6
+      %h4 Your message will be displayed like this:
   .row
     .col-lg-6
       .well
-        %p {{ copyOfMessage }}
-        -# %span(ng-repeat="letter in letters")
-          %b {{ letter.letter }}
-          translated: {{ letter.translated }}
-          %br
+        %span.letter(ng-repeat="letter in letters" ng-class="{translated : letter.translated}")
+          {{ letter.letter }}
+.container
+  .row
+    .col-lg-6
+      %h4 Key
+  .row
+    .col-lg-6
+      %span.key(ng-repeat="(letter, translated) in translations" ng-click="translate(letter)" ng-class="{translated: translated}")
+        {{ letter }}

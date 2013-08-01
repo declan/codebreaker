@@ -1,3 +1,29 @@
+@font-face {
+  font-family: futurama;
+  src: url(/fonts/fr-fal1.ttf) format('truetype');
+}
+
 body {
   padding-top: 50px;
+}
+
+span.letter {
+  font-size: 18px;
+  font-family: futurama;
+  color: #555;
+}
+
+span.letter.translated {
+  font-family: monospace;
+  color: #333;
+}
+
+ span.key.translated {
+   color: #9d261d;
+}
+
+span.key {
+  padding: 0 4px;
+  font-size: 16px;
+  cursor: pointer;
 }
