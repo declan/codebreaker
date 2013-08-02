@@ -1,0 +1,17 @@
+.container
+  .row
+    .col-lg-6
+      %h4 Write your secret message here.
+  .row
+    .col-lg-6
+      %form(ng-submit="saveMessage()")
+        .form-group
+          %textarea(cols=60 rows=4 ng-model="secretMessage")
+        .form-group
+          %button.btn.btn-default(type="submit") Save
+
+.container(style="margin-top: 30px;")
+  .row
+    .col-lg-6
+      %h4 Your message will be displayed like this:
+  = haml :encoded

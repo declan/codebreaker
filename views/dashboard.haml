@@ -1,0 +1,7 @@
+.container
+  .row
+    .col-lg-6
+      %h4 All available codes:
+      %ul
+        %li(ng-repeat="(key, message) in messages")
+          %a(href="{{ key }}") {{ key }}

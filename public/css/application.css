@@ -3,10 +3,6 @@
   src: url(/fonts/fr-fal1.ttf) format('truetype');
 }
 
-body {
-  padding-top: 50px;
-}
-
 span.letter {
   font-size: 18px;
   font-family: futurama;

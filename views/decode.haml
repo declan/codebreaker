@@ -1,0 +1,11 @@
+.container
+  = haml :encoded
+
+.container
+  .row
+    .col-lg-6
+      %h4 Key
+  .row
+    .col-lg-6
+      %span.key(ng-repeat="(letter, translated) in translations" ng-click="translate(letter)" ng-class="{translated: translated}")
+        {{ letter | uppercase }}

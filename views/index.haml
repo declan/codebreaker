@@ -1,32 +1,26 @@
-.navbar-fixed-top.navbar-inverse
-  .container
-    %a.navbar-brand Codebreaker
+!!! DOCTYPE html
+%html(lang="en" ng-app="codeBreaker")
+  %head
+    %meta(charset="utf-8")
+    %link(rel="stylesheet" type="text/css" href="/css/bootstrap.min.css")
+    %link(rel="stylesheet" type="text/css" href="/css/application.css")
+    %script(src="/js/angular.min.js")
+    %script(src="/js/application.js")
+    %title Code Breaker
+  %body(ng-controller="codeCtrl")
+    .navbar-inverse
+      .container
+        %a.navbar-brand(href='/') Codebreaker
+        %ul.nav.navbar-nav
+          %li
+            %a(href='/dashboard') Dashboard
 
-.container
-  .row
-    .col-lg-6
-      %h4 Write your secret message here.
-  .row
-    .col-lg-6
-      %textarea(ng-model="secretMessage")
-  -# .row
-    .col-lg-6
-      %p {{ secretMessage }}
+    %div(ng-view)
 
-.container(style="background:#ccc; margin-top: 30px;")
-  .row
-    .col-lg-6
-      %h4 Your message will be displayed like this:
-  .row
-    .col-lg-6
-      .well
-        %span.letter(ng-repeat="letter in letters" ng-class="{translated : letter.translated}")
-          {{ letter.letter }}
-.container
-  .row
-    .col-lg-6
-      %h4 Key
-  .row
-    .col-lg-6
-      %span.key(ng-repeat="(letter, translated) in translations" ng-click="translate(letter)" ng-class="{translated: translated}")
-        {{ letter }}
+    .container
+      .row
+        .col-lg-6
+          .well
+            %pre $route.current.params = {{$route.current.params}}
+            %pre $routeParams = {{$routeParams}}
+            %pre $scope.messages = {{messages}}

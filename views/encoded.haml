@@ -1,0 +1,5 @@
+.row
+  .col-lg-6
+    .well
+      %span.letter(ng-repeat="letter in letters" ng-class="{translated : letter.translated}")
+        {{ letter.letter }}
