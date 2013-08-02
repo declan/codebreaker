@@ -1,4 +1,4 @@
-angular.module('codeBreaker', [], function($routeProvider, $locationProvider) {
+angular.module('codeBreaker', ['firebase'], function($routeProvider, $locationProvider) {
   $routeProvider.when('/', {
     templateUrl: 'new.html',
     controller: 'NewCtrl'
@@ -13,14 +13,13 @@ angular.module('codeBreaker', [], function($routeProvider, $locationProvider) {
   });
   $locationProvider.html5Mode(true);
 }).
-factory('Messages', function() {
-  return {};
-});
+value('fbURL', 'https://secret-messages.firebaseio.com/messages');
 
-function NewCtrl($scope, $routeParams, Messages) {
+function NewCtrl($scope, $routeParams, fbURL, angularFire) {
+  angularFire(fbURL, $scope, 'messages', {});
+
   $scope.name = 'NewCtrl';
   $scope.params = $routeParams;
-  $scope.messages = Messages;
 
   $scope.updateLetters = function() {
     if (typeof($scope.secretMessage) != 'undefined') {
@@ -37,7 +36,6 @@ function NewCtrl($scope, $routeParams, Messages) {
     $scope.translations[letters[i]] = false;
   }
   $scope.saveMessage = function() {
-    console.log('save message!');
     var key = Math.random().toString(36).slice(2);
     $scope.messages[key] = $scope.secretMessage;
   }
@@ -45,16 +43,16 @@ function NewCtrl($scope, $routeParams, Messages) {
   $scope.$watch('secretMessage', $scope.updateLetters);
 }
 
-function DashboardCtrl($scope, $routeParams, Messages) {
+function DashboardCtrl($scope, $routeParams, fbURL, angularFire) {
   $scope.name = 'DashboardCtrl';
   $scope.params = $routeParams;
-  $scope.messages = Messages;
+  angularFire(fbURL, $scope, 'messages', {});
 }
 
-function TranslateCtrl($scope, $routeParams, Messages) {
+function TranslateCtrl($scope, $routeParams, fbURL, angularFire) {
   $scope.name = 'TranslateCtrl';
   $scope.params = $routeParams;
-  $scope.messages = Messages;
+  angularFire(fbURL, $scope, 'messages', {});
   $scope.secretMessage = $scope.messages[$routeParams.messageKey];
 
   $scope.translations = {};
@@ -66,7 +64,7 @@ function TranslateCtrl($scope, $routeParams, Messages) {
     $scope.letters = [];
     var letters = $scope.secretMessage.split('');
     for (var i = 0; i < letters.length; i++) {
-      $scope.letters.push({letter: letters[i], translated: $scope.translations[letters[i].toLowerCase()]});
+      $scope.letters.push({letter: letters[i], translated: $scope.translations[letters[i]]});
     }
   }
   $scope.translate = function(letter) {
@@ -76,9 +74,9 @@ function TranslateCtrl($scope, $routeParams, Messages) {
   $scope.updateLetters();
 }
 
-function codeCtrl($scope, $route, $routeParams, $location, Messages) {
+function codeCtrl($scope, $route, $routeParams, $location, fbURL, angularFire) {
   $scope.$route = $route;
   $scope.$location = $location;
   $scope.$routeParams = $routeParams;
-  $scope.messages = Messages;
+  angularFire(fbURL, $scope, 'messages', {});
 }
