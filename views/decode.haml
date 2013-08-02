@@ -1,11 +1,13 @@
-.container
-  = haml :encoded
+%div(ng-controller="TranslateCtrl")
+  .navbar-inverse(style="padding-bottom: 100px")
+    .container
+      .row
+        .col-lg-12
+          %h3 Aliens have written you a message.  Use the key below to decode it.
+      = haml :encoded
 
-.container
-  .row
-    .col-lg-6
-      %h4 Key
-  .row
-    .col-lg-6
-      %span.key(ng-repeat="(letter, translated) in translations" ng-click="translate(letter)" ng-class="{translated: translated}")
-        {{ letter | uppercase }}
+  .container.key-container
+    .row
+      .col-lg-6
+        %span.key(ng-repeat="(letter, translated) in translations" ng-click="translate(letter)" ng-class="{translated: translated}")
+          {{ letter | uppercase }}

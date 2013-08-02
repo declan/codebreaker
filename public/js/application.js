@@ -18,7 +18,6 @@ value('fbURL', 'https://secret-messages.firebaseio.com/messages');
 function NewCtrl($scope, $routeParams, fbURL, angularFire) {
   angularFire(fbURL, $scope, 'messages', {});
 
-  $scope.name = 'NewCtrl';
   $scope.params = $routeParams;
 
   $scope.updateLetters = function() {
@@ -44,16 +43,18 @@ function NewCtrl($scope, $routeParams, fbURL, angularFire) {
 }
 
 function DashboardCtrl($scope, $routeParams, fbURL, angularFire) {
-  $scope.name = 'DashboardCtrl';
   $scope.params = $routeParams;
   angularFire(fbURL, $scope, 'messages', {});
 }
 
 function TranslateCtrl($scope, $routeParams, fbURL, angularFire) {
-  $scope.name = 'TranslateCtrl';
   $scope.params = $routeParams;
-  angularFire(fbURL, $scope, 'messages', {});
-  $scope.secretMessage = $scope.messages[$routeParams.messageKey];
+  var promise = angularFire(fbURL, $scope, 'messages', {});
+  promise.then(function() {
+    console.log($scope.messages[$routeParams.messageKey]);
+    $scope.secretMessage = $scope.messages[$routeParams.messageKey];
+    $scope.updateLetters();
+  });
 
   $scope.translations = {};
   var letters = 'abcdefghijklmnopqrstuvwxyz'.split('');
@@ -71,7 +72,6 @@ function TranslateCtrl($scope, $routeParams, fbURL, angularFire) {
     $scope.translations[letter] = true;
     $scope.updateLetters();
   }
-  $scope.updateLetters();
 }
 
 function codeCtrl($scope, $route, $routeParams, $location, fbURL, angularFire) {

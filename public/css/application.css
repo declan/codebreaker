@@ -3,6 +3,10 @@
   src: url(/fonts/fr-fal1.ttf) format('truetype');
 }
 
+.key-container {
+  padding-top: 40px;
+}
+
 span.letter {
   font-size: 18px;
   font-family: futurama;
@@ -14,12 +18,18 @@ span.letter.translated {
   color: #333;
 }
 
- span.key.translated {
+span.key:hover {
+  border-color: #ccc;
+  border-radius: 4px;
+}
+
+span.key.translated, span.letter.translated {
    color: #9d261d;
 }
 
 span.key {
-  padding: 0 4px;
+  padding: 4px 2px 4px 6px;
+  border: 1px solid white;
   font-size: 16px;
   cursor: pointer;
 }

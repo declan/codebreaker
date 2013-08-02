@@ -4,4 +4,5 @@
       %h4 All available codes:
       %ul
         %li(ng-repeat="(key, message) in messages")
-          %a(href="{{ key }}") {{ key }}
+          %a(href="{{ key }}" target="_blank") {{ key }}
+          %span {{ message }}
